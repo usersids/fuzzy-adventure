@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroWave</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+  --lightblk: #404c4d;
+  --blk: #111417;
+  --red: #f08080;
+  --bg: #ffffff;
+}
+
+body {
+  
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-repeat: none;
+  margin: 0;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.button {
+  font-size: 50px;
+  color: white;
+  
+  height: 100px;
+  width: 100px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--lightblk);
+  cursor: pointer;
+   text-transform: uppercase;
+  border-radius: 0.15em;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3 );
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+button .ripple{
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+}
+
+@keyframes ripple{
+  to{
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+.rotatemin{
+    animation:rotation 2s;
+}
+.rotatemedium{
+    animation:rotation 1s;
+}
+.rotatemax{
+    animation:rotation 0.5s;
+}
+.linear{
+    animation-timing-function: linear;
+
+}
+.infinite{
+    animation-iteration-count: infinite;
+}
+#image-fan-moving-1 {
+    width: 350px;
+    height: 350px;
+    margin: auto;
+    display: none;
+    
+}
+body{
+      background-image: radial-gradient(circle at 23% 74%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 57% 79%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 71% 11%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 52% 73%, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.03) 3%,transparent 3%, transparent 100%),radial-gradient(circle at 83% 48%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 25% 65%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 7% 87%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 64% 62%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 38% 76%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 41% 20%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 7%,transparent 7%, transparent 100%),radial-gradient(circle at 29% 67%, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.02) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 75% 48%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 5%,transparent 5%, transparent 100%),radial-gradient(circle at 89% 89%, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.01) 5%,transparent 5%, transparent 100%),linear-gradient(0deg, hsla(176,0%,99%,1),hsla(191,0%,99%,1));
+    }
+#image-fan-moving-2 {
+    width: 350px;
+    height: 350px;
+    margin: auto;
+    display:none;
+    
+}
+#image-fan-moving-3 {
+    width: 350px;
+    height: 350px;
+    margin: auto;
+    display:none;
+    
+}
+#image-fan-moving{
+    margin:auto;
+    width:350px;
+    height:350px;
+}
+@keyframes rotation{
+
+    from {
+        transform:rotate(0deg);
+
+    }to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+    </style>
+</head>
+<body>
+    <center>
+<h1 class="text-5xl font-bold pt-2">AeroWave</h1>
+<br>
+<div id="img">
+    <img id="image-fan-moving" src="fan.png"/>
+    <img class="rotatemin linear infinite" id="image-fan-moving-1" src="fan.png"/>
+    <img class="rotatemedium linear infinite" id="image-fan-moving-2" src="fan.png"/>
+    <img class="rotatemax linear infinite" id="image-fan-moving-3" src="fan.png"/>
+  </div>
+  <br>
+    <button class="button" onclick="min()">Mn</button>
+<button class="button" onclick="medium()">Md</button>
+<button class="button" onclick="max()">Mx</button>
+<br>
+<br>
+<hr>
+
+<a href="index.html" ><button class="h-10 px-6 font-semibold rounded-md bg-black text-white text-1.5xl">
+    Stop
+  </button></a>
+</center>
+<script>
+    
+var buttons = document.getElementsByTagName('button');
+
+Array.prototype.forEach.call(buttons, function(b){
+  b.addEventListener('click', createRipple);
+})
+
+function createRipple(e)
+{
+  if(this.getElementsByClassName('ripple').length > 0)
+    {
+      this.removeChild(this.childNodes[1]);
+    }
+  
+  var circle = document.createElement('div');
+  this.appendChild(circle);
+  
+  var d = Math.max(this.clientWidth, this.clientHeight);
+  circle.style.width = circle.style.height = d + 'px';
+  
+  circle.style.left = e.clientX - this.offsetLeft - d / 2 + 'px';
+  circle.style.top = e.clientY - this.offsetTop - d / 2 + 'px';
+  
+  circle.classList.add('ripple');
+}
+</script>
+
+<script src="blower.js"></script>
+
+
+</body>
+</html>
+
